@@ -2,19 +2,27 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     /* config options here */
-
-    /* for accessing GenomicsDB services and static files; e.g., genome browser tracks
+    assetPrefix: '/xqtl-browser',
     async rewrites() {
-        return [
+        return [                
+            {
+                source: '/igvbrowser',
+                destination: `${process.env.IGVBROWSER_DOMAIN}/`,
+            },
+            {
+                source: '/:path*',
+                destination: `${process.env.TRACK_COLLECTION_DOMAIN}/:path*`,
+            },
             {
                 source: '/service/:path*',
                 destination: 'https://www.niagads.org/genomics/service/:path*'
-            },
+            },           
             {
-                source: '/files/:path*',
-                destination: 'https://www.niagads.org/genomics/files/:path*'
+                source: '/api/:path*',
+                destination: 'http://localhost:8000/:path*'
             }
-        ]
+        ];
+
     }
 
     /* for redirects to the GenomicsDB; e.g., record links
