@@ -1,6 +1,7 @@
 # NIAGADS xQTL-browser-service
 
 > NOTE: this project is still in **alpha**; as no official releases have been made, it is not yet recommended for use by third-party developers
+> NOTE: the project docker build does yet work; placeholder `docker-compose.yaml` file only
 
 This multi-zone `next.js` application creates a portal for interactive browsing and mining of **xQTL** track data and metadata from NIAGADS and FILER (NIAGAD's functional genomics repository).  The service leverages the NIAGADS Alzheimer's Genomics Database to annotate all QTL-linked variants using the Alzheimer's Disease Sequencing Project's (ADSP) annotation pipeline [#TODO -> add citation].  
 
