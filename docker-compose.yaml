@@ -1,7 +1,6 @@
 services:
-  nextjs-template-app:
-    container_name: ${CONTAINER_NAME}_${BUILD}
-    image: ${CONTAINER_NAME}_${VERSION}
+  portal-nextjs-service:
+    image: xqtl_browser_${VERSION}
     build:
       context: .
       dockerfile: ./client.Dockerfile     
@@ -18,10 +17,50 @@ services:
       # https://github.com/Kartikdot/TS-Node-Docker-Starter/blob/main/docker-compose.yaml
       - ignore:/app/node_modules
     networks:
-      - nextjs-app
+      - xqtl-browser-nextwork
+
+  igvbrowser-nextjs-service:
+    image: igvbrowser_${VERSION}
+    build:
+      context: .
+      dockerfile: ./client.Dockerfile     
+      args:
+          BUILD: ${BUILD} 
+          GIT_DEPENDENCIES: ${GIT_DEPENDENCIES}
+
+    ports:
+      - '${PORT}:3001'
+    volumes:
+      - ${APPLICATION_DIR}:/app
+      # by mounting the "node_modules" we force it to be empty
+      # and keep the docker container from finding node_modules installed on the host
+      # https://github.com/Kartikdot/TS-Node-Docker-Starter/blob/main/docker-compose.yaml
+      - ignore:/app/node_modules
+    networks:
+      - xqtl-browser-nextwork
+
+  track-collection-nextjs-service:
+    image: track_collection_${VERSION}
+    build:
+      context: .
+      dockerfile: ./client.Dockerfile     
+      args:
+          BUILD: ${BUILD} 
+          GIT_DEPENDENCIES: ${GIT_DEPENDENCIES}
+
+    ports:
+      - '${PORT}:3002'
+    volumes:
+      - ${APPLICATION_DIR}:/app
+      # by mounting the "node_modules" we force it to be empty
+      # and keep the docker container from finding node_modules installed on the host
+      # https://github.com/Kartikdot/TS-Node-Docker-Starter/blob/main/docker-compose.yaml
+      - ignore:/app/node_modules
+    networks:
+      - xqtl-browser-nextwork
 
 networks:
-  nextjs-app:
+  xqtl-browser-nextwork:
 
 
 volumes:
