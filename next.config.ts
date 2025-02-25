@@ -6,46 +6,54 @@ const nextConfig: NextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
-    basePath: `/${process.env.EXPLORER_SERVICE_PATH}`,
+    basePath: `/${process.env.PORTAL_PATH}`,
     async rewrites() {
         return [
             {
-                source: "/collection",
+                source: `/${process.env.PORTAL_PATH}/collection`,
                 destination: `${process.env.TRACK_COLLECTION_DOMAIN}/`,
+                basePath: false
             },
             {
-                source: "/track/:path+",
+                source: `/${process.env.PORTAL_PATH}/track/:path+`,
                 destination: `${process.env.TRACK_COLLECTION_DOMAIN}/track/:path+`,
+                basePath: false
             },
             {
-                source: "/track-collection-static/_next/:path+",
+                source: `/track-collection-static/_next/:path+`,
                 destination: `${process.env.TRACK_COLLECTION_DOMAIN}/track-collection-static/_next/:path+`,
+                basePath: false
             },
 
             {
-                source: '/igvbrowser',
+                source: `/${process.env.PORTAL_PATH}/igvbrowser`,
                 destination: `${process.env.IGVBROWSER_DOMAIN}/`,
+                basePath: false
             },
             
             {
                 source: "/igvbrowser-static/_next/:path+",
                 destination: `${process.env.IGVBROWSER_DOMAIN}/igvbrowser-static/_next/:path+`,
+                basePath: false
             },
 
 
             {
                 source: '/service/:path*',
-                destination: 'https://www.niagads.org/genomics/service/:path*'
+                destination: 'https://www.niagads.org/genomics/service/:path*',
+                basePath: false
             },
 
             {
                 source: '/api/:path*',
-                destination: 'https://api.niagads.org/:path*'
+                destination: 'https://api.niagads.org/:path*',
+                basePath: false
             },
             
             {
                 source: '/files/:path*',
-                destination: 'https://www.niagads.org/genomics/files/:path*'
+                destination: 'https://www.niagads.org/genomics/files/:path*',
+                basePath: false
             },
         ];
 
@@ -57,17 +65,20 @@ const nextConfig: NextConfig = {
             {
                 source: '/gene/:path*',
                 destination: 'https://www.niagads.org/genomics/app/record/gene/:path*',
-                permanent: true
+                permanent: true,
+                basePath: false
             },
             {
                 source: '/variant/:path*',
                 destination: 'https://www.niagads.org/genomics/app/record/variant/:path*',
-                permanent: true
+                permanent: true,
+                basePath: false,
             },
             {
                 source: '/record/:path*',
                 destination: 'https://www.niagads.org/genomics/app/record/:path*',
-                permanent: true
+                permanent: true,
+                basePath: false
             },
         ]
 

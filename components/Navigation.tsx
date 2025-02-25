@@ -33,7 +33,7 @@ function NavigationMenu() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href={`${process.env.NEXT_PUBLIC_EXPLORER_SERVICE_URL}/igvbrowser`}>
+                    <Link color="foreground" href={`${process.env.NEXT_PUBLIC_PORTAL_URL}/igvbrowser`}>
                         Genome Browser
                     </Link>
                 </NavbarItem>
