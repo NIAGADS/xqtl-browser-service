@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    basePath: `/${process.env.EXPLORER_SERVICE_PATH}`,
     async rewrites() {
         return [
             {

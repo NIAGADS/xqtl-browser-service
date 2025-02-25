@@ -28,12 +28,12 @@ function NavigationMenu() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem isActive>
-                    <Link aria-current="page" href={`${process.env.NEXT_PUBLIC_BROWSER_SERVICE_URL}/collection`}>
+                    <Link aria-current="page" href={`${process.env.NEXT_PUBLIC_EXPLORE_SERVICE_URL}/collection`}>
                         Dataset Listing
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href={`${process.env.NEXT_PUBLIC_BROWSER_SERVICE_URL}/igvbrowser`}>
+                    <Link color="foreground" href={`${process.env.NEXT_PUBLIC_EXPLORER_SERVICE_URL}/igvbrowser`}>
                         Genome Browser
                     </Link>
                 </NavbarItem>
