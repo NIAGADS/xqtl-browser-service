@@ -28,12 +28,12 @@ The explorer service links two NIAGADS Open Access Microservices:
 
 You may develop in the dockerized application as it is configured for hot-reloads. If you wish to develop outside of docker you will require:
 
-* `node`: ^23.3.0
-* `npm`: ^10.9.0
+* `node`: ^20.18.0
+* `npm`: ^10.8.2
 
 ### Create a Workspace on the Host
 
-To enable hot re-loads and easy rebuilds by pulling updates from the repository, project code is hosted on the server.  Create an application working directory named & located as per your preference.  For example here we use `/xqtl-explorer-project` as our working directory.
+To enable hot re-loads and easy rebuilds by pulling updates from the repository, project code is hosted on the server.  Create an application project directory named & located as per your preference.  For example in the following instructions we use `/xqtl-explorer-project` as our project directory.
 
 ```bash
 mkdir /xqtl-explorer-project
@@ -66,58 +66,58 @@ The portal explorer application has three configuration files that need to be cu
 
 ##### Portal: `sample.env`
 
-The following properties are set by this file:
+The following properties can be set in this file:
 
 * NEXT_PUBLIC_PROJECT_NAME=`the name of the project`
-* NEXT_PUBLIC_PROJECT_PUBLIC_URL=`project domain` (e.g., `https://xqtl.niagads.org`)
+* NEXT_PUBLIC_PROJECT_PUBLIC_URL=`project domain` 
 * NEXT_PUBLIC_PORTAL_PATH=`portal service base path`
-* NEXT_PUBLIC_PORTAL_URL=`$NEXT_PUBLIC_PROJECT_PUBLIC_URL/$NEXT_PUBLIC_PORTAL_PATH`
 
-Customize as needed or use the default settings (for xqtl.niagads.org) and then copy to `.env` in the sample directory.
+Copy to `.env` in the sample directory, and then customize the `.env` file as necessary.
 
 ```bash
 cp sample.env .env
 ```
 
+Defaults are for the project hosted at **xqtl.niagads.org**) and then
+
 ##### Portal: `sample.env.local`
 
-The following properties are set by this file:
+The following properties in this file can be customized
 
-* IGVBROWSER_SERVICE_PORT=`port on host for the igv-microservice`
-* TRACK_COLLECTION_SERVICE_PORT=`port on host for the track-collection microservice`
-* IGVBROWSER_DOMAIN=`http://localhost:$IGVBROWSER_SERVICE_PORT`
-* TRACK_COLLECTION_DOMAIN=`http://localhost:$TRACK_COLLECTION_SERVICE_PORT`
 * PORTAL_PATH=`portal service base path`
 
-> NOTE: `PORTAL_PATH` must be the same as the `NEXT_PUBLIC_PORTAL_PATH` in the `.env` file.
+> NOTE: `PORTAL_PATH` must be the same as the `NEXT_PUBLIC_PORTAL_PATH` in the `.env` file (i.e., `explorer`)
 
-Customize as needed or use the default settings (for xqt.niagads.org) and then copy to `.env.local` in the same directory.
+Copy to `.env.local` in the same directory.
 
 ```bash
 cp sample.env.local .env.local
 ```
 
+Customize `PORTAL_PATH` in `.env.local` as needed or and **leave the other settings as is** (breaking changes).
+
 ##### Portal: `docker.env.sample`
 
 NIAGADS microservices are templated, not all settings in the `docker.env.sample` file are relevant to this project.  Relevant settings are:
 
-* PORT=`mapped port on host`
+* PORT=`mapped port on host` 
 * APPLICATION_DIR=`full path to application code on host`
 
 > NOTE: the `PORT` for the `xqtl-explorer-service` is the one that will be `public` on the host.   This service serves as the public-facing portal for the microservices.
 
-Use the default `PORT` or change as necessary.  
-
-Set `APPLICATION_DIR`.  In our example that would be:
-
-```bash
-APPLICATION_DIRECTORY=/xqtl-explorer-project/xqtl-explorer-service
-```
-
-And then copy to `docker.env` in the working (same) directory:
+Copy to `docker.env` in the working (same) directory:
 
 ```bash
 cp docker.env.sample docker.env
+```
+
+And then customize the `docker.env` file as follows:  
+
+1. Use the default `PORT` (_3000_) or change as necessary.  
+2. Set `APPLICATION_DIR`.  In our example that would be:
+
+```bash
+APPLICATION_DIRECTORY=/xqtl-explorer-project/xqtl-explorer-service
 ```
 
 #### Configure igv-microservice
@@ -163,22 +163,21 @@ NIAGADS microservices are templated, not all settings in the `docker.env.sample`
 * PORT=`mapped port on host`
 * APPLICATION_DIR=`full path to application code on host`
 
-> NOTE: the `PORT` for the `igvbrowser-microservice` will **NOT** be publicly accessible. This is a `localhost` only service.
+> NOTE: the `PORT` for the `igvbrowser-microservice` will **NOT** be publicly accessible. This is a `localhost` only service and used for testing purposes.
 
-Use the default `PORT` or change as necessary.  
-
-> NOTE: if you change the default `PORT` here, you will also need to change the `IGVBROWSER_SERVICE_PORT` setting in `xqt-explorer-service/.env.local`.
-
-Set `APPLICATION_DIR`.  In our example that would be:
-
-```bash
-APPLICATION_DIRECTORY=/xqtl-explorer-project/igvbrowser-microservice
-```
-
-And then copy to `docker.env` in the working (same) directory:
+Copy to `docker.env` in the working (same) directory:
 
 ```bash
 cp docker.env.sample docker.env
+```
+
+And then edit as follows:
+
+1. Use the default `PORT` or change as necessary.  
+2. Set `APPLICATION_DIR`.  In our example that would be:
+
+```bash
+APPLICATION_DIRECTORY=/xqtl-explorer-project/igvbrowser-microservice
 ```
 
 #### Configure track-collection-microservice
@@ -224,22 +223,21 @@ NIAGADS microservices are templated, not all settings in the `docker.env.sample`
 * PORT=`mapped port on host`
 * APPLICATION_DIR=`full path to application code on host`
 
-> NOTE: the `PORT` for the `track-collection-microservice` will **NOT** be publicly accessible. This is a `localhost` only service.
+> NOTE: the `PORT` for the `track-collection-microservice` will **NOT** be publicly accessible. This is a `localhost` only service and used for testing purposes.
 
-Use the default `PORT` or change as necessary.  
-
-> NOTE: if you change the default `PORT` here, you will also need to change the `TRACK_COLLECTION_SERVICE_PORT` setting in `xqt-explorer-service/.env.local`.
-
-Set `APPLICATION_DIR`.  In our example that would be:
-
-```bash
-APPLICATION_DIRECTORY=/xqtl-explorer-project/track-collection-microservice
-```
-
-And then copy to `docker.env` in the working (same) directory:
+Copy to `docker.env` in the working (same) directory:
 
 ```bash
 cp docker.env.sample docker.env
+```
+
+And then edit as follows:
+
+1. Use the default `PORT` or change as necessary.  
+2. Set `APPLICATION_DIR`.  In our example that would be:
+
+```bash
+APPLICATION_DIRECTORY=/xqtl-explorer-project/track-collection-microservice
 ```
 
 ### Docker Deployment
