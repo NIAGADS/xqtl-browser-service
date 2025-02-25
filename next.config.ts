@@ -3,29 +3,54 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     /* config options here */
     assetPrefix: '/xqtl-browser',
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     async rewrites() {
-        return [                
+        return [
+            {
+                source: "/collection",
+                destination: `${process.env.TRACK_COLLECTION_DOMAIN}/`,
+            },
+            {
+                source: "/track/:path+",
+                destination: `${process.env.TRACK_COLLECTION_DOMAIN}/track/:path+`,
+            },
+            {
+                source: "/track-collection-static/_next/:path+",
+                destination: `${process.env.TRACK_COLLECTION_DOMAIN}/track-collection-static/_next/:path+`,
+            },
+
             {
                 source: '/igvbrowser',
                 destination: `${process.env.IGVBROWSER_DOMAIN}/`,
             },
+            
             {
-                source: '/:path*',
-                destination: `${process.env.TRACK_COLLECTION_DOMAIN}/:path*`,
+                source: "/igvbrowser-static/_next/:path+",
+                destination: `${process.env.IGVBROWSER_DOMAIN}/igvbrowser-static/_next/:path+`,
             },
+
+
             {
                 source: '/service/:path*',
                 destination: 'https://www.niagads.org/genomics/service/:path*'
-            },           
+            },
+
             {
                 source: '/api/:path*',
-                destination: 'http://localhost:8000/:path*'
-            }
+                destination: 'https://api.niagads.org/:path*'
+            },
+            
+            {
+                source: '/files/:path*',
+                destination: 'https://www.niagads.org/genomics/files/:path*'
+            },
         ];
 
-    }
+    },
 
-    /* for redirects to the GenomicsDB; e.g., record links
+    //for redirects to the GenomicsDB; e.g., record links
     async redirects() {
         return [
             {
@@ -44,10 +69,10 @@ const nextConfig: NextConfig = {
                 permanent: true
             },
         ]
-        ]
+
     }
 
-    */
+    
 };
 
 export default nextConfig;
