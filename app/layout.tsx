@@ -4,8 +4,8 @@ import { Providers } from "./provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "NIAGADS Template next.js Application",
-    description: "https://github.com/NIAGADS/nextjs-template",
+    title: "ADSP FunGen-xQTL Browser",
+    description: "https://xqtl.niagads.org",
 };
 
 export default function RootLayout({
