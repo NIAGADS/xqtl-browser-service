@@ -16,7 +16,7 @@ export const Logo = () => {
 
 function NavigationMenu() {
     return (
-        <Navbar isBordered={true} position="static">
+        <Navbar isBordered={false} position="static">
             <NavbarBrand>
                 <Logo />
                 <p className="font-bold text-inherit">{process.env.NEXT_PUBLIC_PROJECT_NAME}</p>
